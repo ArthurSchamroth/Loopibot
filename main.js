@@ -1,13 +1,15 @@
 const { Client } = require("discord.js");
+const { TOKEN, PREFIX } = require("./config");
 const client = new Client();
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log("connected");
 });
 
 client.on("message", msg => {
-  if (msg.content === "ping") msg.reply("pong");
+  // bk
+  if (msg.content === "ping") msg.channel.send("pong");
   if (msg.content === "everyone") msg.channel.send();
 });
 
-client.login("NjA2MTYwMjY4NjQ4NjQ0NjMw.Xnjdkw.2D_OoIKjkZcPZVJ7pEdBMDXKDek");
+client.login(TOKEN);
