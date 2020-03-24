@@ -7,6 +7,7 @@ module.exports = (client, message) => {
     .split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if (client.commands.has(command))
-    client.commands.get(command)(client, message, args);
+  const cmd = client.commands.get(command);
+  if (!cmd) return undefined;
+  cmd.run(client, message, args);
 };
