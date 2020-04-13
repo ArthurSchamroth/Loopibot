@@ -1,6 +1,6 @@
 exports.run = (client, message) => {
   client.mysql = require("../util/db.js");
-  const sql = "INSERT INTO user VALUES(5,'test')";
+  const sql = `INSERT INTO participant(discordId) VALUES(${message.author.id})`;
   const role = message.guild.roles.cache.find(r => r.name === "test");
   if (message.content === "!event")
     if (message.member.roles.cache.find(r => r.name === "test")) {
@@ -10,10 +10,10 @@ exports.run = (client, message) => {
       client.channels.cache
         .get("691670772984447066")
         .send(`${message.author} participe`);
+
+      client.mysql.querySql(sql);
     }
   message.delete({ timeout: 3000 });
-
-  client.mysql.querySql(sql);
 };
 
 exports.help = {
