@@ -4,8 +4,19 @@ const client = new Client();
 const fs = require("fs");
 
 client.PREFIX = PREFIX;
+client.mongoose = require("./util/mongoose.js");
 
 client.commands = new Collection();
+
+fs.readdir("./events/", (err, files) => {
+  if (err) return console.error;
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return undefined;
+    const event = require(`./events/${file}`);
+    const eventName = file.split(".")[0];
+    client.on(eventName, event.bind(null, client));
+  });
+});
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error;
@@ -19,9 +30,7 @@ fs.readdir("./commands/", (err, files) => {
 
 client.commands.set("delete", require("./commands/delete.js"));
 
-client.on("ready", () => require("./events/ready.js")(client));
-client.on("message", msg => require("./events/message.js")(client, msg));
-
+client.mongoose.init();
 client.login(TOKEN);
 
 /* client.on("error", console.error);

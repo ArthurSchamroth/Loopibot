@@ -7,7 +7,8 @@
   "author": "Raeskinet <contact@raeskinet.com>",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^12.0.2"
+    "discord.js": "^12.0.2",
+    "mongoose": "^5.9.7"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -20,7 +21,7 @@
         "error",
         "windows"
       ],
-      "quotes":[
+      "quotes": [
         "warn",
         "double"
       ],
@@ -30,7 +31,6 @@
       ],
       "curly": "off",
       "no-trailing-spaces": "off"
-
     }
-}
+  }
 }

@@ -1,6 +1,6 @@
 exports.run = (client, message) => {
   if (message.content === "!event")
-    const role = message.guild.roles.cache.find(r => r.name === "Event");
+    //const role = message.guild.roles.cache.find(r => r.name === "Event");
   if (message.member.roles.cache.find(r => r.name === "Event")) {
     message.author.send("Tu es déjà inscrit");
   } else {
