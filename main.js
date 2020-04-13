@@ -2,9 +2,9 @@ const { Client, Collection } = require("discord.js");
 const { TOKEN, PREFIX } = require("./config");
 const client = new Client();
 const fs = require("fs");
-const mysql = require("mysql");
 
 client.PREFIX = PREFIX;
+client.mysql = require("./util/mysql.js");
 
 client.commands = new Collection();
 
@@ -30,18 +30,8 @@ fs.readdir("./commands/", (err, files) => {
 
 client.commands.set("delete", require("./commands/delete.js"));
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "admin",
-  database: "test"
-});
 
-con.connect(err => {
-  if (err) throw err;
-  console.log("connecté à la base de donnée");
-});
-
+client.mysql.init();
 client.login(TOKEN);
 
 /* client.on("error", console.error);
