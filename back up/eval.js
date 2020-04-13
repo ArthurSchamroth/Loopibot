@@ -1,8 +1,9 @@
 exports.run = (client, message, args) => {
-  function clean(text){
+ async function clean(text){
     if(typeof text === "string"){
       return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
     }
+      return text;
   }
 
 

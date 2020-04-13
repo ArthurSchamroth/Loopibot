@@ -4,7 +4,7 @@ const client = new Client();
 const fs = require("fs");
 
 client.PREFIX = PREFIX;
-client.mongoose = require("./util/mongoose.js");
+client.mongoose = require("./util/mongoose");
 
 client.commands = new Collection();
 

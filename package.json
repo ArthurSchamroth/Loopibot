@@ -30,7 +30,9 @@
         2
       ],
       "curly": "off",
-      "no-trailing-spaces": "off"
+      "no-trailing-spaces": "off",
+      "prefer-template": "off",
+      "no-eval": "off"
     }
   }
 }
