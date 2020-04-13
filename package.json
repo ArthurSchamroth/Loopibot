@@ -32,7 +32,10 @@
       "curly": "off",
       "no-trailing-spaces": "off",
       "prefer-template": "off",
-      "no-eval": "off"
+      "no-eval": "off",
+      "no-unreachable": "off",
+      "prefer-arrow-callback": "off",
+      "no-negated-condition": "off"
     }
   }
 }

@@ -1,10 +1,12 @@
 const { Client, Collection } = require("discord.js");
+
 const { TOKEN, PREFIX } = require("./config");
 const client = new Client();
 const fs = require("fs");
 
+
 client.PREFIX = PREFIX;
-client.mysql = require("./util/mysql.js");
+client.mysql = require("./util/db");
 
 client.commands = new Collection();
 
@@ -30,9 +32,8 @@ fs.readdir("./commands/", (err, files) => {
 
 client.commands.set("delete", require("./commands/delete.js"));
 
-
-client.mysql.init();
 client.login(TOKEN);
+client.mysql.init();
 
 /* client.on("error", console.error);
 client.on("warn", console.warn);
