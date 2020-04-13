@@ -2,9 +2,9 @@ const { Client, Collection } = require("discord.js");
 const { TOKEN, PREFIX } = require("./config");
 const client = new Client();
 const fs = require("fs");
+const mysql = require("mysql");
 
 client.PREFIX = PREFIX;
-client.mongoose = require("./util/mongoose");
 
 client.commands = new Collection();
 
@@ -30,7 +30,18 @@ fs.readdir("./commands/", (err, files) => {
 
 client.commands.set("delete", require("./commands/delete.js"));
 
-client.mongoose.init();
+const con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "admin",
+  database: "test"
+});
+
+con.connect(err => {
+  if (err) throw err;
+  console.log("connecté à la base de donnée");
+});
+
 client.login(TOKEN);
 
 /* client.on("error", console.error);
