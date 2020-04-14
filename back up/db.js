@@ -21,5 +21,24 @@ module.exports = {
       if (err) throw err;
       console.log(result);
     });
+  },
+
+  selectSql: () => {
+    function getDiscordId(callback) {
+      const sql = "SELECT discordID FROM participant WHERE id = 1";
+      con.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log(result[0].discordId);
+
+        return callback(result[0].discordId);
+      });
+    }
+
+    let donnee = "";
+
+    getDiscordId(function(result) {
+      donnee = result;
+      console.log(donnee);
+    });
   }
 };

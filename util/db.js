@@ -10,16 +10,16 @@ const con = mysql.createConnection({
 
 module.exports = {
   init: () => {
-    con.connect(err => {
+    con.connect((err) => {
       if (err) throw err;
       console.log("connecté à la base de donnée");
     });
   },
 
-  querySql: sql => {
+  querySql: (sql) => new Promise((resolve, reject) => {
     con.query(sql, function msg(err, result) {
-      if (err) throw err;
-      console.log(result);
+      if (err) reject(err);
+      resolve(result);
     });
-  }
+  })
 };
