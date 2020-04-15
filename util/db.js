@@ -1,4 +1,4 @@
-const { HOST, USER, PASSWORD, DATABASE } = require("../config.js");
+const { HOST, USER, PASSWORD, DATABASE } = require("./config.js");
 const mysql = require("mysql");
 
 const con = mysql.createConnection({
@@ -10,16 +10,22 @@ const con = mysql.createConnection({
 
 module.exports = {
   init: () => {
-    con.connect((err) => {
+    con.connect(err => {
       if (err) throw err;
       console.log("connecté à la base de donnée");
     });
   },
 
-  querySql: (sql) => new Promise((resolve, reject) => {
+  selectSql: sql => new Promise((resolve, reject) => {
     con.query(sql, function msg(err, result) {
       if (err) reject(err);
       resolve(result);
     });
-  })
+  }),
+
+  querySql: sql => {
+    con.query(sql, function msg(err, result) {
+      if (err) throw err;
+    });
+  }
 };

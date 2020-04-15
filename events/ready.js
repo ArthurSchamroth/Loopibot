@@ -1,3 +1,3 @@
 module.exports = () => {
-  console.log("connected");
+  console.log("bot opérationnel");
 };
