@@ -5,7 +5,8 @@ const con = mysql.createConnection({
   host: HOST,
   user: USER,
   password: PASSWORD,
-  database: DATABASE
+  database: DATABASE,
+  charset: "utf8mb4"
 });
 
 module.exports = {
@@ -24,8 +25,11 @@ module.exports = {
   }),
 
   querySql: sql => {
-    con.query(sql, function msg(err, result) {
-      if (err) throw err;
+    con.query(sql, function msg(err) {
+      if (err) {
+        console.log("A wild error appeared!", err);
+        process.exit(1);
+      }
     });
   }
 };

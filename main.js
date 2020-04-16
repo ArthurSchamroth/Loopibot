@@ -7,6 +7,7 @@ const fs = require("fs");
 
 client.PREFIX = PREFIX;
 client.mysql = require("./util/db");
+client.bd = require("./commands/set-db");
 
 client.commands = new Collection();
 
@@ -30,9 +31,18 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
+fs.readdir("./commands/evenement/", (err, files) => {
+  if (err) return console.error;
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return undefined;
+    const props = require(`./commands/evenement/${file}`);
+    const cmdName = file.split(".")[0];
+    client.commands.set(cmdName, props);
+  });
+});
+
 client.login(TOKEN);
 client.mysql.init();
-
 
 /* client.on("error", console.error);
 client.on("warn", console.warn);

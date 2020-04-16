@@ -1,4 +1,5 @@
 module.exports = (client, message) => {
+
   if (message.author.bot) return;
   if (message.content.indexOf(client.PREFIX) !== 0) return;
   const args = message.content
@@ -10,4 +11,6 @@ module.exports = (client, message) => {
   const cmd = client.commands.get(command);
   if (!cmd) return undefined;
   cmd.run(client, message, args);
+
+  
 };
