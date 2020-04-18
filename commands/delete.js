@@ -9,7 +9,7 @@ exports.run = (client, message) => {
       message.channel.send("impossible d'effacer des messages datant de plus de 14 jours.");
       setTimeout(function suprr() {
         message.channel.bulkDelete(2);
-      }, 3000);
+      }, 1500);
     });
   }
 };

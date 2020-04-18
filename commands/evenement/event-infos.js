@@ -15,7 +15,7 @@ exports.run = (client, message) => {
       message.channel.send("aucun participant");
       setTimeout(function suprr() {
         message.channel.bulkDelete(2);
-      }, 3000);
+      }, 1500);
     }
   });
 };

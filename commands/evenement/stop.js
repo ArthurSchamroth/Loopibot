@@ -18,7 +18,7 @@ exports.run = (client, message) => {
   message.channel.send("L'event est terminé ! (message supprimé dans 3 secondes)");
   setTimeout(function suprr() {
     message.channel.bulkDelete(2);
-  }, 3000);
+  }, 1500);
 };
 
 exports.help = {
