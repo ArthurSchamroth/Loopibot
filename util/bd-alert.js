@@ -1,3 +1,4 @@
+const { COLUMNS_DISCORD_USER_INFO, TABLES } = require("../util/config");
 module.exports = {
   alert: client => {
     client.mysql = require("../util/db.js");
@@ -7,9 +8,12 @@ module.exports = {
     setInterval(function msg() {
       console.log(date.toString());
 
-      if (date.getHours() === 0 && date.getMinutes() === 1) {
+      if (date.getHours() === 0) {
         client.mysql
-          .selectSql("SELECT discordId, birthday FROM userinfo")
+          .selectSql(
+            `SELECT ${COLUMNS_DISCORD_USER_INFO[1]},
+            ${COLUMNS_DISCORD_USER_INFO[6]} FROM ${TABLES[0]}`
+          )
           .then(str => {
             for (let i = 0; i < str.length; i++) {
               if (str[i].birthday) {
