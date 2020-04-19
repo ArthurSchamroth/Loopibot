@@ -2,24 +2,32 @@ exports.run = (client, message) => {
   client.mysql = require("../util/db.js");
   client.methods = require("../util/methods.js");
 
-  client.mysql.querySql("DROP TABLE IF EXISTS userinfo");
-  client.mysql.querySql(`CREATE TABLE userinfo (
+  client.mysql.querySql("DROP TABLE IF EXISTS discord_user_info");
+  client.mysql.querySql(`CREATE TABLE discord_user_info (
     id int(11) NOT NULL AUTO_INCREMENT,
     discordId varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
     pseudo varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    discriminator varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    tag varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     email varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     birthday date DEFAULT NULL,
+    avatar varchar(255),
+    bot tinyint(4) DEFAULT NULL,
+    creationDate date DEFAULT NULL,
+    available tinyint(4) NOT NULL,
+    ban tinyint(4) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY discordId_UNIQUE (discordId)
   ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
-  let name;
-
+  
   try {
     message.guild.members.cache.each(member => {
-      name = member.user.username;
+      let name = member.user.username;
       name = client.methods.correctText(name);
-      client.mysql.querySql(`INSERT INTO userinfo(discordId, pseudo) VALUES(${member.user.id},'${name}')`);
+      let userTag = member.user.tag;
+      userTag = client.methods.correctText(userTag);
+      client.mysql.querySql(`INSERT IGNORE INTO discord_user_info(discordId, pseudo, discriminator, tag,  avatar, bot, creationDate, available, ban) VALUES(${member.user.id},'${name}', '${member.user.discriminator}', '${userTag}', '${member.user.avatarURL({ format: "png" })}', ${member.user.bot}, '${member.user.createdAt.toJSON().slice(0, 10)}', ${true}, ${false})`);
     });
   } catch (e) {
     console.log("erreur : " + e);

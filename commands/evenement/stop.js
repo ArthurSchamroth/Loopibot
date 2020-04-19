@@ -1,7 +1,7 @@
 exports.run = (client, message) => {
   client.mysql = require("../../util/db.js");
 
-  const role = message.guild.roles.cache.find(r => r.name === "test");
+  const role = message.guild.roles.cache.find(r => r.name === "Event");
 
   client.mysql.selectSql("SELECT discordId FROM participant").then(str => {
     const data = [];
