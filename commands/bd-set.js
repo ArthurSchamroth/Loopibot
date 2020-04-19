@@ -1,3 +1,5 @@
+const { COLUMNS_DISCORD_USER_INFO } = require("../util/config");
+
 exports.run = (client, message) => {
   client.mysql = require("../util/db.js");
   const value = message.content.slice(8);
@@ -9,7 +11,7 @@ exports.run = (client, message) => {
       const userId = message.author.id;
       let final = date.setDate(date.getDate() + 1);
       final = date.toJSON().slice(0, 10);
-      client.mysql.querySql(`UPDATE userinfo SET birthday = '${final}'  WHERE discordId = '${userId}'`);
+      client.mysql.querySql(`UPDATE discord_user_info SET ${COLUMNS_DISCORD_USER_INFO[6]} = '${final}'  WHERE discordId = '${userId}'`);
       message.channel.send("Votre date de naissance a été enregistrée avec succès");
     }
   } else {

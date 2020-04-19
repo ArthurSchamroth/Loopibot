@@ -9,7 +9,7 @@ module.exports = (client, member) => {
         name = client.methods.correctText(name);
         let userTag = member.user.tag;
         userTag = client.methods.correctText(userTag);
-        client.mysql.querySql(`INSERT IGNORE INTO discord_user_info(discordId, pseudo, discriminator, tag, nickname,  avatar, bot, creationDate, available, ban) VALUES(${member.user.id},'${name}', '${member.user.discriminator}', '${userTag}', '${member.nickname}', '${member.user.avatarURL({ format: "png" })}', ${member.user.bot}, '${member.user.createdAt.toJSON().slice(0, 10)}', ${true}, ${false})`);
+        client.mysql.querySql(`INSERT IGNORE INTO discord_user_info(discordId, pseudo, discriminator, tag, nickname,  avatar, bot, account_creation, available, ban) VALUES(${member.user.id},'${name}', '${member.user.discriminator}', '${userTag}', '${member.nickname}', '${member.user.avatarURL({ format: "png" })}', ${member.user.bot}, '${member.user.createdAt.toJSON().slice(0, 10)}', ${true}, ${false})`);
       }
       else {
         client.mysql.querySql(`UPDATE discord_user_info SET available = ${true} WHERE (discordId = ${member.user.id});`);
