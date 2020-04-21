@@ -1,0 +1,42 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "Bot Discord New Heaven of Gaming",
+  "main": "main.js",
+  "repository": "https://github.com/Raeskinet/Bot-discord-NHG.git",
+  "author": "Raeskinet <contact@raeskinet.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.0.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-aqua": "^7.2.1"
+  },
+  "eslintConfig": {
+    "extends": "aqua/node",
+    "rules": {
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "indent": [
+        "error",
+        2
+      ],
+      "curly": "off",
+      "no-trailing-spaces": "off",
+      "prefer-template": "off",
+      "no-eval": "off",
+      "no-unreachable": "off",
+      "prefer-arrow-callback": "off",
+      "no-negated-condition": "off",
+      "brace-style": "off"
+    }
+  }
+}
