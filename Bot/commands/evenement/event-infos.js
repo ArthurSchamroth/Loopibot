@@ -1,5 +1,5 @@
 exports.run = (client, message) => {
-  client.mysql = require("../../util/db.js");
+  client.mysql = require("../../mysql/db.js");
 
   client.mysql.selectSql("SELECT discordId FROM participant").then(str => {
     if (str.length > 0) {

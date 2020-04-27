@@ -1,8 +1,7 @@
 const { COLUMNS_DISCORD_USER_INFO, TABLES } = require("../util/config");
 
 exports.run = (client, message) => {
-
-  client.mysql = require("../util/db.js");
+  client.mysql = require("../mysql/db.js");
 
   const value = message.content.slice(8);
   const date = new Date(value);
@@ -18,9 +17,9 @@ exports.run = (client, message) => {
       final = date.toJSON().slice(0, 10);
 
       client.mysql.querySql(
-        `UPDATE ${TABLES[0]}
+        `UPDATE ${TABLES[1]}
       SET
-        ${COLUMNS_DISCORD_USER_INFO[6]} = ? 
+        ${COLUMNS_DISCORD_USER_INFO[5]} = ? 
       WHERE
         ${COLUMNS_DISCORD_USER_INFO[1]} = ?`,
         [

@@ -6,7 +6,7 @@ const fs = require("fs");
 
 
 client.PREFIX = PREFIX;
-client.mysql = require("./util/db");
+client.mysql = require("./mysql/db");
 client.birthday = require("./util/bd-alert");
 client.bd = require("./commands/set-db");
 
@@ -44,6 +44,9 @@ fs.readdir("./commands/evenement/", (err, files) => {
 
 client.login(TOKEN);
 client.mysql.init();
+setInterval(function release() {
+  client.mysql.querySql("SELECT 1");
+}, 5000);
 client.birthday.alert(client);
 
 /* client.on("error", console.error);

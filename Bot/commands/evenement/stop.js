@@ -1,5 +1,5 @@
 exports.run = (client, message) => {
-  client.mysql = require("../../util/db.js");
+  client.mysql = require("../../mysql/db.js");
 
   const role = message.guild.roles.cache.find(r => r.name === "Event");
 

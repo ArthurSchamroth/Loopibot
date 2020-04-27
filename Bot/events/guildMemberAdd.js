@@ -6,7 +6,7 @@ const {
 
 } = require("../util/config");
 module.exports = (client, member) => {
-  client.mysql = require("../util/db.js");
+  client.mysql = require("../mysql/db.js");
   client.methods = require("../util/methods.js");
   try {
     let ok = false;

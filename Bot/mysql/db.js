@@ -1,4 +1,4 @@
-const { HOST, USER, PASSWORD, DATABASE } = require("./config.js");
+const { HOST, USER, PASSWORD, DATABASE } = require("../util/config.js");
 const mysql = require("mysql");
 
 const con = mysql.createConnection({
