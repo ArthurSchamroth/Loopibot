@@ -10,7 +10,7 @@ const {
   COLUMNS_DISCORD_BAN,
   COLUMNS_DISCORD_COMMAND,
   COLUMNS_DISCORD_HAS_PERMISSION,
-  COLUMNS_DISCORD_EXECUTE,
+  COLUMNS_DISCORD_EXECUTE
 } = require("../util/config");
 
 exports.run = (client, message) => {
@@ -33,22 +33,12 @@ exports.run = (client, message) => {
     {
       client.mysql.querySql(`CREATE TABLE ${TABLES[0]} (
         ${COLUMNS_DISCORD_GUILDS[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_GUILDS[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_GUILDS[i++]
-        } varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_GUILDS[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_GUILDS[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_GUILDS[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_GUILDS[i++]} varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_GUILDS[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_GUILDS[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
         ${COLUMNS_DISCORD_GUILDS[i++]} date NOT NULL,
-        ${
-          COLUMNS_DISCORD_GUILDS[i++]
-        } varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_GUILDS[i++]} varchar(255) COLLATE utf8mb4_unicode_ci NULL,
         ${COLUMNS_DISCORD_GUILDS[i++]} tinyint(4) NOT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_GUILDS[0]}),
         UNIQUE KEY ${COLUMNS_DISCORD_GUILDS[1]} (${COLUMNS_DISCORD_GUILDS[1]})
@@ -57,49 +47,31 @@ exports.run = (client, message) => {
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[1]} (
         ${COLUMNS_DISCORD_USER_INFO[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_USER_INFO[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_USER_INFO[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_USER_INFO[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_USER_INFO[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
         ${COLUMNS_DISCORD_USER_INFO[i++]} date DEFAULT NULL,
         ${COLUMNS_DISCORD_USER_INFO[i++]} varchar(255),
         ${COLUMNS_DISCORD_USER_INFO[i++]} tinyint(4) NOT NULL,
         ${COLUMNS_DISCORD_USER_INFO[i++]} DATE NOT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_USER_INFO[0]}),
-        UNIQUE KEY ${COLUMNS_DISCORD_USER_INFO[1]}_UNIQUE (${
-        COLUMNS_DISCORD_USER_INFO[1]
-      })
+        UNIQUE KEY ${COLUMNS_DISCORD_USER_INFO[1]}_UNIQUE (${COLUMNS_DISCORD_USER_INFO[1]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
       i = 0;
       client.mysql.querySql(
         `CREATE TABLE ?? (
         ${COLUMNS_DISCORD_JOIN[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_JOIN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_JOIN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_JOIN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+        ${COLUMNS_DISCORD_JOIN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_JOIN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_JOIN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
         ${COLUMNS_DISCORD_JOIN[i++]} date NOT NULL,
         ${COLUMNS_DISCORD_JOIN[i++]} tinyint(4) NOT NULL,
         ${COLUMNS_DISCORD_JOIN[i++]} tinyint(4) NOT NULL,
         ${COLUMNS_DISCORD_JOIN[i++]} integer(10) NOT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_JOIN[0]}),
-        UNIQUE KEY ${COLUMNS_DISCORD_JOIN[1]} (${COLUMNS_DISCORD_JOIN[1]}, ${
-          COLUMNS_DISCORD_JOIN[2]
-        })
+        UNIQUE KEY ${COLUMNS_DISCORD_JOIN[1]} (${COLUMNS_DISCORD_JOIN[1]}, ${COLUMNS_DISCORD_JOIN[2]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
         [TABLES[2]]
       );
@@ -107,18 +79,10 @@ exports.run = (client, message) => {
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[3]} (
         ${COLUMNS_DISCORD_ROLE[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_ROLE[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_ROLE[i++]
-        } varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_ROLE[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_ROLE[i++]
-        } varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_ROLE[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_ROLE[i++]} varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_ROLE[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_ROLE[i++]} varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
         ${COLUMNS_DISCORD_ROLE[i++]} integer(255) NOT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_ROLE[0]}),
         UNIQUE KEY ${COLUMNS_DISCORD_ROLE[1]} (${COLUMNS_DISCORD_ROLE[1]})
@@ -127,57 +91,35 @@ exports.run = (client, message) => {
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[4]} (
         ${COLUMNS_DISCORD_HAS_ROLE[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_HAS_ROLE[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_HAS_ROLE[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_HAS_ROLE[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_HAS_ROLE[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_HAS_ROLE[0]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[5]} (
         ${COLUMNS_DISCORD_WARN[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_WARN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_WARN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_WARN[i++]
-        } TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+        ${COLUMNS_DISCORD_WARN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_WARN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_WARN[i++]} TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_WARN[0]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[6]} (
         ${COLUMNS_DISCORD_KICK[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_KICK[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_KICK[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_KICK[i++]
-        } TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+        ${COLUMNS_DISCORD_KICK[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_KICK[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_KICK[i++]} TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_KICK[0]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[7]} (
         ${COLUMNS_DISCORD_BAN[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_BAN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_BAN[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_BAN[i++]
-        } TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+        ${COLUMNS_DISCORD_BAN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_BAN[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_BAN[i++]} TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
         ${COLUMNS_DISCORD_BAN[i++]} date DEFAULT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_BAN[0]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
@@ -185,27 +127,16 @@ exports.run = (client, message) => {
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[8]} (
         ${COLUMNS_DISCORD_COMMAND[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_COMMAND[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_COMMAND[i++]
-        } TEXT(520) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-        ${
-          COLUMNS_DISCORD_COMMAND[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_COMMAND[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_COMMAND[i++]} varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_COMMAND[0]}),
-        UNIQUE KEY ${COLUMNS_DISCORD_COMMAND[1]}_UNIQUE (${
-        COLUMNS_DISCORD_COMMAND[1]
-      })
+        UNIQUE KEY ${COLUMNS_DISCORD_COMMAND[1]}_UNIQUE (${COLUMNS_DISCORD_COMMAND[1]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[9]} (
         ${COLUMNS_DISCORD_HAS_PERMISSION[i++]} SERIAL NOT NULL,
-        ${
-          COLUMNS_DISCORD_HAS_PERMISSION[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_HAS_PERMISSION[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
         ${COLUMNS_DISCORD_HAS_PERMISSION[i++]} BIGINT(20) UNSIGNED NOT NULL,
         PRIMARY KEY (${COLUMNS_DISCORD_HAS_PERMISSION[0]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
@@ -214,11 +145,10 @@ exports.run = (client, message) => {
       client.mysql.querySql(`CREATE TABLE ${TABLES[10]} (
         ${COLUMNS_DISCORD_EXECUTE[i++]} SERIAL NOT NULL,
         ${COLUMNS_DISCORD_EXECUTE[i++]} BIGINT(20) UNSIGNED NOT NULL,
-        ${
-          COLUMNS_DISCORD_EXECUTE[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_EXECUTE[i++]} varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
         ${COLUMNS_DISCORD_EXECUTE[i++]} tinyint(4) NOT NULL,
-        PRIMARY KEY (${COLUMNS_DISCORD_EXECUTE[0]})
+        PRIMARY KEY (${COLUMNS_DISCORD_EXECUTE[0]}),
+        UNIQUE KEY EXECUTE_UNIQUE (${COLUMNS_DISCORD_EXECUTE[1]}, ${COLUMNS_DISCORD_EXECUTE[2]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
       client.mysql.querySql(
@@ -316,7 +246,7 @@ exports.run = (client, message) => {
 
     /* -------------INSERT TABLES-------------*/
     {
-      client.guilds.cache.each((guild) => {
+      client.guilds.cache.each(guild => {
         client.mysql.querySql(
           `INSERT IGNORE INTO ${TABLES[0]}(
             ${COLUMNS_DISCORD_GUILDS[1]},
@@ -335,58 +265,53 @@ exports.run = (client, message) => {
             guild.owner.user.username,
             guild.createdAt.toJSON().slice(0, 10),
             guild.iconURL({ format: "png" }),
-            true,
+            true
           ]
         );
 
         client.mysql.querySql(
           `INSERT IGNORE INTO ${TABLES[8]}(
             ${COLUMNS_DISCORD_COMMAND[1]},
-            ${COLUMNS_DISCORD_COMMAND[2]},
-            ${COLUMNS_DISCORD_COMMAND[3]}
+            ${COLUMNS_DISCORD_COMMAND[2]}
           )
-          VALUES( ?, ?, ?)`,
-          ["avatar", "show user avatar", ""]
+          VALUES( ?, ?)`,
+          ["avatar", "show user avatar"]
         );
 
         client.mysql.querySql(
           `INSERT IGNORE INTO ${TABLES[8]}(
             ${COLUMNS_DISCORD_COMMAND[1]},
-            ${COLUMNS_DISCORD_COMMAND[2]},
-            ${COLUMNS_DISCORD_COMMAND[3]}
+            ${COLUMNS_DISCORD_COMMAND[2]}
           )
-          VALUES( ?, ?, ?)`,
-          ["bd-set", "set birhtday", ""]
+          VALUES( ?, ?)`,
+          ["bd-set", "set birhtday"]
         );
 
         client.mysql.querySql(
           `INSERT IGNORE INTO ${TABLES[8]}(
             ${COLUMNS_DISCORD_COMMAND[1]},
-            ${COLUMNS_DISCORD_COMMAND[2]},
-            ${COLUMNS_DISCORD_COMMAND[3]}
+            ${COLUMNS_DISCORD_COMMAND[2]}
           )
-          VALUES( ?, ?, ?)`,
-          ["clear-channel", "delete all the message from a channel", ""]
+          VALUES( ?, ?)`,
+          ["clear-channel", "delete all the message from a channel"]
         );
 
         client.mysql.querySql(
           `INSERT IGNORE INTO ${TABLES[8]}(
             ${COLUMNS_DISCORD_COMMAND[1]},
-            ${COLUMNS_DISCORD_COMMAND[2]},
-            ${COLUMNS_DISCORD_COMMAND[3]}
+            ${COLUMNS_DISCORD_COMMAND[2]}
           )
-          VALUES( ?, ?, ?)`,
-          ["delete", "delete a number of message", ""]
+          VALUES( ?, ?)`,
+          ["delete", "delete a number of message"]
         );
 
         client.mysql.querySql(
           `INSERT IGNORE INTO ${TABLES[8]}(
             ${COLUMNS_DISCORD_COMMAND[1]},
-            ${COLUMNS_DISCORD_COMMAND[2]},
-            ${COLUMNS_DISCORD_COMMAND[3]}
+            ${COLUMNS_DISCORD_COMMAND[2]}
           )
-          VALUES( ?, ?, ?)`,
-          ["sinfo", "show info from the current server", ""]
+          VALUES( ?, ?)`,
+          ["sinfo", "show info from the current server"]
         );
 
         client.mysql.querySql(
@@ -406,7 +331,7 @@ exports.run = (client, message) => {
             TABLES[0],
             COLUMNS_DISCORD_GUILDS[1],
             guild.id,
-            true,
+            true
           ]
         );
 
@@ -427,7 +352,7 @@ exports.run = (client, message) => {
             TABLES[0],
             COLUMNS_DISCORD_GUILDS[1],
             guild.id,
-            true,
+            true
           ]
         );
 
@@ -448,7 +373,7 @@ exports.run = (client, message) => {
             TABLES[0],
             COLUMNS_DISCORD_GUILDS[1],
             guild.id,
-            true,
+            true
           ]
         );
 
@@ -469,7 +394,7 @@ exports.run = (client, message) => {
             TABLES[0],
             COLUMNS_DISCORD_GUILDS[1],
             guild.id,
-            true,
+            true
           ]
         );
 
@@ -490,11 +415,10 @@ exports.run = (client, message) => {
             TABLES[0],
             COLUMNS_DISCORD_GUILDS[1],
             guild.id,
-            true,
+            true
           ]
         );
-
-        guild.members.cache.each((member) => {
+        guild.members.cache.each(member => {
           client.mysql.querySql(
             `INSERT IGNORE INTO ${TABLES[1]}(
               ${COLUMNS_DISCORD_USER_INFO[1]},
@@ -513,7 +437,7 @@ exports.run = (client, message) => {
               member.user.tag,
               member.user.avatarURL({ format: "png" }),
               member.user.bot,
-              member.user.createdAt.toJSON().slice(0, 10),
+              member.user.createdAt.toJSON().slice(0, 10)
             ]
           );
           client.mysql.querySql(
@@ -539,10 +463,10 @@ exports.run = (client, message) => {
               member.joinedAt.toJSON().slice(0, 10),
               true,
               false,
-              0,
+              0
             ]
           );
-          guild.roles.cache.each((role) => {
+          guild.roles.cache.each(role => {
             client.mysql.querySql(
               `INSERT IGNORE INTO ${TABLES[3]}(
                 ${COLUMNS_DISCORD_ROLE[1]},
@@ -565,8 +489,8 @@ exports.run = (client, message) => {
             }
           });
         });
-        guild.fetchBans().then((ban) => {
-          ban.each((baninfo) => {
+        guild.fetchBans().then(ban => {
+          ban.each(baninfo => {
             client.mysql.querySql(
               `INSERT IGNORE INTO ${TABLES[1]}(
                 ${COLUMNS_DISCORD_USER_INFO[1]},
@@ -585,7 +509,7 @@ exports.run = (client, message) => {
                 baninfo.user.tag,
                 baninfo.user.avatarURL({ format: "png" }),
                 baninfo.user.bot,
-                baninfo.user.createdAt.toJSON().slice(0, 10),
+                baninfo.user.createdAt.toJSON().slice(0, 10)
               ]
             );
             client.mysql.querySql(
@@ -613,7 +537,7 @@ exports.run = (client, message) => {
                 null,
                 false,
                 true,
-                0,
+                0
               ]
             );
             client.mysql.querySql(
@@ -633,7 +557,7 @@ exports.run = (client, message) => {
                 TABLES[0],
                 COLUMNS_DISCORD_GUILDS[1],
                 guild.id,
-                baninfo.reason,
+                baninfo.reason
               ]
             );
           });
@@ -644,7 +568,7 @@ exports.run = (client, message) => {
     console.log("erreur : " + e);
   }
 
-  message.channel.send("la base de donnée à été crée et initalisée");
+  // message.channel.send("la base de donnée à été crée et initalisée");
 
   setTimeout(function suprr() {
     message.channel.bulkDelete(2);
@@ -652,5 +576,5 @@ exports.run = (client, message) => {
 };
 
 exports.help = {
-  name: "client",
+  name: "client"
 };
