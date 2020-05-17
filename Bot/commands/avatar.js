@@ -1,6 +1,5 @@
 const { MessageAttachment } = require("discord.js");
 exports.run = (client, message) => {
-<<<<<<< HEAD
   client.mysql = require("../mysql/db.js");
   client.mysql
     .selectSql(
@@ -33,12 +32,6 @@ exports.run = (client, message) => {
     });
 };
 
-=======
-  const attachment = new MessageAttachment(message.author.avatarURL({ format: "png" }));
-  message.channel.send(attachment);
-
-};
->>>>>>> 97d2f4476b3c016999f8a6f22915e71876aa6c9d
 exports.help = {
   name: "avatar"
 };

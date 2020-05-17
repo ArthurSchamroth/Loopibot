@@ -1,4 +1,5 @@
 module.exports = (client, message) => {
+<<<<<<< HEAD
   client.mysql = require("../mysql/db.js");
 
   try {
@@ -46,6 +47,15 @@ module.exports = (client, message) => {
   if (message.author.bot) return;
   if (message.content.indexOf(client.PREFIX) !== 0) return;
   const args = message.content.slice(client.PREFIX.length).trim().split(/ +/g);
+=======
+
+  if (message.author.bot) return;
+  if (message.content.indexOf(client.PREFIX) !== 0) return;
+  const args = message.content
+    .slice(client.PREFIX.length)
+    .trim()
+    .split(/ +/g);
+>>>>>>> 97d2f4476b3c016999f8a6f22915e71876aa6c9d
   const command = args.shift().toLowerCase();
 
   const cmd = client.commands.get(command);
