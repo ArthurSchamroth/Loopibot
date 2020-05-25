@@ -7,6 +7,7 @@ exports.run = (client, message) => {
       message.guild.id
     )
     .then(str => {
+      console.log(str);
       if (str[0].enabled === 1) {
         if (message.content.length >= 8) {
           const userid = message.mentions.users.first().id;

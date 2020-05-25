@@ -14,6 +14,13 @@ module.exports = (client, guild, user) => {
         user.id
       ]
     );
+    client.mysql.querySql(
+      "delete from ban where guild_id = ? and member_id = ?",
+      [
+        guild.id,
+        user.id
+      ]
+    );
   }
   catch (e) {
     console.log("erreur : " + e);

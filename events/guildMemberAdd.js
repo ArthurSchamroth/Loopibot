@@ -44,29 +44,17 @@ module.exports = (client, member) => {
       ]
     );
     client.mysql.querySql(
-      `INSERT IGNORE INTO ??(
-        ${COLUMNS_DISCORD_JOIN[1]},
-        ${COLUMNS_DISCORD_JOIN[2]},
-        ${COLUMNS_DISCORD_JOIN[3]},
-        ${COLUMNS_DISCORD_JOIN[4]},
-        ${COLUMNS_DISCORD_JOIN[5]}
-      )
-      VALUES((SELECT ?? from ?? where ?? = ?),(SELECT ?? from ?? where ?? = ?), ?, ?, ?)`,
+      " CALL insert_join_guild((SELECT guild_id from guild where guild_id = ?),(SELECT member_id from member where member_id = ?), ?, ?, ?, ?, ?, ?, ?)",
       [
-        TABLES[2],
-        COLUMNS_DISCORD_GUILDS[1],
-        TABLES[0],
-        COLUMNS_DISCORD_GUILDS[1],
         member.guild.id,
-        COLUMNS_DISCORD_USER_INFO[1],
-        TABLES[1],
-        COLUMNS_DISCORD_USER_INFO[1],
         member.user.id,
         member.nickname,
         member.joinedAt.toJSON().slice(0, 10),
         true,
         false,
-        0
+        0,
+        member.permissions.bitfield,
+        false
       ]
     );
     if (ok === false) {

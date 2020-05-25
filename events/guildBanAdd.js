@@ -16,6 +16,8 @@ module.exports = (client, guild, user) => {
       ]
     );
     const date_ban = new Date();
+    let final = date_ban.toJSON().slice(0, 10);
+    console.log(final);
     guild.fetchBan(user.id).then(ban => {
       client.mysql.querySql(
         `INSERT IGNORE ${TABLES[7]}(
@@ -25,10 +27,8 @@ module.exports = (client, guild, user) => {
           ${COLUMNS_DISCORD_BAN[4]})
   
           values(
-          (select member_id from member where member_id = '${user.id}'),
-          (select guild_id from guild where guild_id = '${guild.id}'),
-          '${ban.reason}',
-          '${date_ban.toJSON().slice(0, 10)}')`
+          (select member_id from member where member_id = '${user.id}'), (select guild_id from guild where guild_id = '${guild.id}'), '${ban.reason}', ?)`,
+          [final]
       );
     });
   }

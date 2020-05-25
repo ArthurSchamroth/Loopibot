@@ -16,7 +16,7 @@ module.exports = (client, message) => {
   } catch (e) {
     console.log("erreur : " + e);
   }
-  if (message.content.startsWith("&")) {
+  if (message.content.startsWith("!")) {
     try {
       client.mysql
         .selectSql(
@@ -26,7 +26,7 @@ module.exports = (client, message) => {
         .then(result => {
           for (let i = 0; i < result.length; i++) {
             if (result[i].command_id > 5) {
-              if (message.content === "&" + result[i].name) {
+              if (message.content === "!" + result[i].name) {
                 if (result[i].enabled === 1) {
                   message.channel.send(result[i].response);
                 }
