@@ -1,4 +1,4 @@
-const { HOST, USER, PASSWORD, DATABASE } = require("../util/config.js");
+const { HOST, USER, PASSWORD, DATABASE, PORT } = require("../util/config.js");
 const mysql = require("mysql");
 
 const con = mysql.createConnection({
@@ -6,23 +6,25 @@ const con = mysql.createConnection({
   user: USER,
   password: PASSWORD,
   database: DATABASE,
-  charset: "utf8mb4"
+  port: PORT,
+  charset: "utf8mb4",
 });
 
 module.exports = {
   init: () => {
-    con.connect(err => {
+    con.connect((err) => {
       if (err) throw err;
       console.log("connecté à la base de donnée");
     });
   },
 
-  selectSql: (sql, post) => new Promise((resolve, reject) => {
-    con.query(sql, post, function msg(err, result) {
-      if (err) reject(err);
-      resolve(result);
-    });
-  }),
+  selectSql: (sql, post) =>
+    new Promise((resolve, reject) => {
+      con.query(sql, post, function msg(err, result) {
+        if (err) reject(err);
+        resolve(result);
+      });
+    }),
 
   querySql: (sql, post) => {
     con.query(sql, post, function msg(err) {
@@ -31,5 +33,5 @@ module.exports = {
         process.exit(1);
       }
     });
-  }
+  },
 };

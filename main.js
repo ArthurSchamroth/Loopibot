@@ -4,17 +4,15 @@ const { TOKEN, PREFIX } = require("./util/config");
 const client = new Client();
 const fs = require("fs");
 
-
 client.PREFIX = PREFIX;
 client.mysql = require("./mysql/db");
 client.birthday = require("./util/bd-alert");
-client.bd = require("./commands/set-db");
 
 client.commands = new Collection();
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error;
-  files.forEach(file => {
+  files.forEach((file) => {
     if (!file.endsWith(".js")) return undefined;
     const event = require(`./events/${file}`);
     const eventName = file.split(".")[0];
@@ -24,7 +22,7 @@ fs.readdir("./events/", (err, files) => {
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error;
-  files.forEach(file => {
+  files.forEach((file) => {
     if (!file.endsWith(".js")) return undefined;
     const props = require(`./commands/${file}`);
     const cmdName = file.split(".")[0];
@@ -34,7 +32,7 @@ fs.readdir("./commands/", (err, files) => {
 
 fs.readdir("./commands/evenement/", (err, files) => {
   if (err) return console.error;
-  files.forEach(file => {
+  files.forEach((file) => {
     if (!file.endsWith(".js")) return undefined;
     const props = require(`./commands/evenement/${file}`);
     const cmdName = file.split(".")[0];
@@ -48,7 +46,3 @@ setInterval(function release() {
   client.mysql.querySql("SELECT 1");
 }, 5000);
 client.birthday.alert(client);
-
-/* client.on("error", console.error);
-client.on("warn", console.warn);
-client.on("debug", console.debug); */

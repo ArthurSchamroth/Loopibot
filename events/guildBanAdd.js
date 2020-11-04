@@ -16,11 +16,13 @@ module.exports = (client, guild, user) => {
       ]
     );
     const date_ban = new Date();
-    let final = date_ban.toJSON().slice(0, 10);
+    let final = date_ban.toJSON()
+      .slice(0, 10);
     console.log(final);
-    guild.fetchBan(user.id).then(ban => {
-      client.mysql.querySql(
-        `INSERT IGNORE ${TABLES[7]}(
+    guild.fetchBan(user.id)
+      .then(ban => {
+        client.mysql.querySql(
+          `INSERT IGNORE ${TABLES[7]}(
           ${COLUMNS_DISCORD_BAN[1]},
           ${COLUMNS_DISCORD_BAN[2]},
           ${COLUMNS_DISCORD_BAN[3]},
@@ -29,10 +31,9 @@ module.exports = (client, guild, user) => {
           values(
           (select member_id from member where member_id = '${user.id}'), (select guild_id from guild where guild_id = '${guild.id}'), '${ban.reason}', ?)`,
           [final]
-      );
-    });
-  }
-  catch (e) {
+        );
+      });
+  } catch (e) {
     console.log("erreur : " + e);
   }
 };

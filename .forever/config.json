@@ -1,0 +1,17 @@
+{
+  "root": "/home/debian/.forever",
+  "pidPath": "/home/debian/.forever/pids",
+  "sockPath": "/home/debian/.forever/sock",
+  "loglength": 100,
+  "logstream": false,
+  "columns": [
+    "uid",
+    "command",
+    "script",
+    "forever",
+    "pid",
+    "id",
+    "logfile",
+    "uptime"
+  ]
+}
