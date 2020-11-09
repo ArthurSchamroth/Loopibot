@@ -18,13 +18,13 @@ exports.run = (client, message) => {
             "impossible d'effacer des messages datant de plus de 14 jours."
           );
           setTimeout(function suprr() {
-            message.channel.bulkDelete(2);
+            message.channel.bulkDelete(1);
           }, 1500);
         });
       } else {
         message.channel.send("veuillez activer la commande dans le pannel");
         setTimeout(function suprr() {
-          message.channel.bulkDelete(2);
+          message.channel.bulkDelete(1);
         }, 1500);
       }
     });

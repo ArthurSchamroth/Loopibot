@@ -12,9 +12,8 @@ module.exports = (client, message) => {
         client.mysql.querySql(
           `update join_guild  set xp = ${xp} where member_id = ${message.author.id} and guild_id = '${message.guild.id}'`
         );
-      });
+      }).catch(e => console.log(e));
   } catch (e) {
-    console.log("erreur : " + e);
   }
   if (message.content.startsWith("!")) {
     try {

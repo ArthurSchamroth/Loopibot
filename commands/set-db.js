@@ -11,6 +11,9 @@ const {
   COLUMNS_DISCORD_COMMAND,
   COLUMNS_DISCORD_HAS_PERMISSION,
   COLUMNS_DISCORD_EXECUTE,
+  COLUMNS_DISCORD_TEXT_CHANNEL,
+  COLUMNS_DISCORD_VOICE_CHANNEL,
+  COLUMNS_DISCORD_CATEGORY_CHANNEL,
 } = require("../util/config");
 
 exports.run = (client, message) => {
@@ -39,9 +42,7 @@ exports.run = (client, message) => {
         ${
           COLUMNS_DISCORD_GUILDS[i++]
         } varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-        ${
-          COLUMNS_DISCORD_GUILDS[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_GUILDS[i++]} varchar(45) COLLATE utf8mb4_unicode_ci,
         ${
           COLUMNS_DISCORD_GUILDS[i++]
         } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -56,23 +57,23 @@ exports.run = (client, message) => {
 
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[1]} (
-        ${COLUMNS_DISCORD_USER_INFO[i++]} SERIAL NOT NULL,
+        ${COLUMNS_DISCORD_USER_INFO[i++]} SERIAL,
         ${
           COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        } varchar(45) COLLATE utf8mb4_unicode_ci,
         ${
           COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        } varchar(45) COLLATE utf8mb4_unicode_ci,
         ${
           COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        } varchar(45) COLLATE utf8mb4_unicode_ci,
         ${
           COLUMNS_DISCORD_USER_INFO[i++]
-        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        } varchar(45) COLLATE utf8mb4_unicode_ci,
         ${COLUMNS_DISCORD_USER_INFO[i++]} date DEFAULT NULL,
         ${COLUMNS_DISCORD_USER_INFO[i++]} varchar(255),
-        ${COLUMNS_DISCORD_USER_INFO[i++]} tinyint(4) NOT NULL,
-        ${COLUMNS_DISCORD_USER_INFO[i++]} DATE NOT NULL,
+        ${COLUMNS_DISCORD_USER_INFO[i++]} tinyint(4),
+        ${COLUMNS_DISCORD_USER_INFO[i++]} DATE,
         PRIMARY KEY (${COLUMNS_DISCORD_USER_INFO[0]}),
         UNIQUE KEY ${COLUMNS_DISCORD_USER_INFO[1]}_UNIQUE (${
         COLUMNS_DISCORD_USER_INFO[1]
@@ -122,6 +123,7 @@ exports.run = (client, message) => {
           COLUMNS_DISCORD_ROLE[i++]
         } varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
         ${COLUMNS_DISCORD_ROLE[i++]} integer(255) NOT NULL,
+        number bigint(10) not null,
         PRIMARY KEY (${COLUMNS_DISCORD_ROLE[0]}),
         UNIQUE KEY ${COLUMNS_DISCORD_ROLE[1]} (${COLUMNS_DISCORD_ROLE[1]})
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
@@ -226,6 +228,70 @@ exports.run = (client, message) => {
       })
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
+      i = 0;
+      client.mysql.querySql(`CREATE TABLE ${TABLES[11]}(
+        ${COLUMNS_DISCORD_TEXT_CHANNEL[i++]} SERIAL NOT NULL,
+        ${
+          COLUMNS_DISCORD_TEXT_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${
+          COLUMNS_DISCORD_TEXT_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_TEXT_CHANNEL[i++]} integer(10) NOT NULL,
+        ${
+          COLUMNS_DISCORD_TEXT_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_TEXT_CHANNEL[i++]} tinyint(4) NOT NULL,
+        ${
+          COLUMNS_DISCORD_TEXT_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        PRIMARY KEY (${COLUMNS_DISCORD_TEXT_CHANNEL[0]}),
+        UNIQUE KEY ${COLUMNS_DISCORD_TEXT_CHANNEL[1]} (${
+        COLUMNS_DISCORD_TEXT_CHANNEL[1]
+      })
+      )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
+
+      i = 0;
+      client.mysql.querySql(`CREATE TABLE ${TABLES[12]}(
+        ${COLUMNS_DISCORD_CATEGORY_CHANNEL[i++]} SERIAL NOT NULL,
+        ${
+          COLUMNS_DISCORD_CATEGORY_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${
+          COLUMNS_DISCORD_CATEGORY_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_CATEGORY_CHANNEL[i++]} integer(10) NOT NULL,
+        ${
+          COLUMNS_DISCORD_CATEGORY_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        PRIMARY KEY (${COLUMNS_DISCORD_CATEGORY_CHANNEL[0]}),
+        UNIQUE KEY ${COLUMNS_DISCORD_CATEGORY_CHANNEL[1]} (${
+        COLUMNS_DISCORD_CATEGORY_CHANNEL[1]
+      })
+      )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
+      i = 0;
+      client.mysql.querySql(`CREATE TABLE ${TABLES[13]}(
+        ${COLUMNS_DISCORD_VOICE_CHANNEL[i++]} SERIAL NOT NULL,
+        ${
+          COLUMNS_DISCORD_VOICE_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${
+          COLUMNS_DISCORD_VOICE_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${COLUMNS_DISCORD_VOICE_CHANNEL[i++]} integer(10) NOT NULL,
+        ${
+          COLUMNS_DISCORD_VOICE_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        ${
+          COLUMNS_DISCORD_VOICE_CHANNEL[i++]
+        } varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        PRIMARY KEY (${COLUMNS_DISCORD_VOICE_CHANNEL[0]}),
+        UNIQUE KEY ${COLUMNS_DISCORD_VOICE_CHANNEL[1]} (${
+        COLUMNS_DISCORD_VOICE_CHANNEL[1]
+      })
+      )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
+
+  
       client.mysql.querySql(
         `ALTER TABLE ?? ADD FOREIGN KEY
           (${COLUMNS_DISCORD_JOIN[1]})
@@ -317,6 +383,42 @@ exports.run = (client, message) => {
       ${TABLES[0]}(${COLUMNS_DISCORD_GUILDS[1]})`,
         [TABLES[10]]
       );
+      client.mysql.querySql(
+        `ALTER TABLE ?? ADD FOREIGN KEY
+      (${COLUMNS_DISCORD_TEXT_CHANNEL[4]})
+      REFERENCES 
+      ${TABLES[0]}(${COLUMNS_DISCORD_GUILDS[1]})`,
+        [TABLES[11]]
+      );
+      client.mysql.querySql(
+        `ALTER TABLE ?? ADD FOREIGN KEY
+      (${COLUMNS_DISCORD_CATEGORY_CHANNEL[4]})
+      REFERENCES 
+      ${TABLES[0]}(${COLUMNS_DISCORD_GUILDS[1]})`,
+        [TABLES[12]]
+      );
+      client.mysql.querySql(
+        `ALTER TABLE ?? ADD FOREIGN KEY
+      (${COLUMNS_DISCORD_TEXT_CHANNEL[6]})
+      REFERENCES 
+      ${TABLES[12]}(${COLUMNS_DISCORD_CATEGORY_CHANNEL[1]})`,
+        [TABLES[11]]
+      );
+      client.mysql.querySql(
+        `ALTER TABLE ?? ADD FOREIGN KEY
+      (${COLUMNS_DISCORD_VOICE_CHANNEL[5]})
+      REFERENCES 
+      ${TABLES[12]}(${COLUMNS_DISCORD_CATEGORY_CHANNEL[1]})`,
+        [TABLES[11]]
+      );
+
+      client.mysql.querySql(
+        `ALTER TABLE ?? ADD FOREIGN KEY
+      (${COLUMNS_DISCORD_VOICE_CHANNEL[4]})
+      REFERENCES 
+      ${TABLES[0]}(${COLUMNS_DISCORD_GUILDS[1]})`,
+        [TABLES[11]]
+      );
     }
 
     client.mysql.querySql(
@@ -335,13 +437,22 @@ exports.run = (client, message) => {
       "create or replace procedure insert_join_guild(in guild_id varchar(45),in member_id varchar(45), in nickname varchar(45), in account_join date, in available tinyint(4), in ban tinyint(4), in xp integer(10), in permissions integer(15), in admin tinyint(4)) begin insert ignore into join_guild(member_id, guild_id,nickname,account_join ,available,ban,xp,permissions, admin) values(member_id, guild_id,nickname,account_join ,available,ban,xp,permissions,admin); end"
     );
     client.mysql.querySql(
-      "create or replace procedure insert_role(in role_id varchar(45),in name varchar(255), in guild_id varchar(45), in color varchar(20), in position integer(255)) begin insert ignore into role(role_id, name, guild_id,color,position) values(role_id, name, guild_id,color, position); end"
+      "create or replace procedure insert_role(in role_id varchar(45),in name varchar(255), in guild_id varchar(45), in color varchar(20), in position integer(255), in number bigint(10)) begin insert ignore into role(role_id, name, guild_id,color,position, number) values(role_id, name, guild_id,color, position, number); end"
     );
     client.mysql.querySql(
       "create or replace procedure insert_has_role(in role_id varchar(45), in member_id varchar(45)) begin insert ignore into has_role(role_id, member_id) values(role_id, member_id); end"
     );
     client.mysql.querySql(
       "create or replace procedure insert_ban(in member_id varchar(45),in guild_id varchar(45),in reason text, in ban_date date) begin insert ignore into ban(member_id,guild_id,reason,ban_date) values(member_id,guild_id,reason,ban_date); end"
+    );
+    client.mysql.querySql(
+      "create or replace procedure insert_category(in category_id varchar(45), in name varchar(45), in position integer(10), in guild_id varchar(45)) begin insert ignore into category_channel(category_id,name,position,guild_id) values(category_id, name, position, guild_id); end"
+    );
+    client.mysql.querySql(
+      "create or replace procedure insert_channel(in channel_id varchar(45), in name varchar(45), in position integer(10), in guild_id varchar(45), in nsfw tinyint(4), in category_id varchar(45)) begin insert ignore into text_channel(channel_id,name,position,guild_id,nsfw, category_id) values(channel_id, name, position, guild_id, nsfw, category_id); end"
+    );
+    client.mysql.querySql(
+      "create or replace procedure insert_voice(in voice_id varchar(45), in name varchar(45), in position integer(10), in guild_id varchar(45), in category_id varchar(45)) begin insert ignore into voice_channel(voice_id,name,position,guild_id, category_id) values(voice_id, name, position, guild_id, category_id); end"
     );
     /* -------------INSERT TABLES-------------*/
     {
@@ -351,11 +462,40 @@ exports.run = (client, message) => {
             guild.id,
             guild.name,
             guild.ownerID,
-            guild.owner.user.username,
+            guild.owner.user.id,
             guild.createdAt.toJSON().slice(0, 10),
             guild.iconURL({ format: "png" }),
             true,
           ]);
+          guild.channels.cache.each((channel) => {
+            if (channel.type == "category") {
+              client.mysql.querySql("call insert_category(?,?,?,?);", [
+                channel.id,
+                channel.name,
+                channel.position,
+                guild.id,
+              ]);
+            }
+            if (channel.type == "text") {
+              client.mysql.querySql("call insert_channel(?,?,?,?,?,?);", [
+                channel.id,
+                channel.name,
+                channel.position,
+                guild.id,
+                channel.nsfw,
+                channel.parentID,
+              ]);
+            }
+            if (channel.type == "voice") {
+              client.mysql.querySql("call insert_voice(?,?,?,?,?);", [
+                channel.id,
+                channel.name,
+                channel.position,
+                guild.id,
+                channel.parentID,
+              ]);
+            }
+          });
 
           client.mysql.querySql("call insert_command(?,?)", [
             "avatar",
@@ -449,18 +589,18 @@ exports.run = (client, message) => {
             guild.roles.cache.each((role) => {
               try {
                 client.mysql.querySql(
-                  "call insert_role( ?, ?, (select guild_id from guild where guild_id = ?), ?, ?)",
-                  [role.id, role.name, guild.id, role.color, role.position]
+                  "call insert_role( ?, ?, (select guild_id from guild where guild_id = ?), ?, ?, ?)",
+                  [role.id, role.name, guild.id, role.color, role.position, role.members.size]
                 );
               } catch (error) {
                 console.log(error);
               }
-              if (member.roles.cache.has(role.id)) {
-                client.mysql.querySql(
-                  "call insert_has_role((select role_id from role where role_id = ?),(select member_id from member where member_id = ?))",
-                  [role.id, member.user.id]
-                );
-              }
+              // if (member.roles.cache.has(role.id)) {
+              //   client.mysql.querySql(
+              //     "call insert_has_role((select role_id from role where role_id = ?),(select member_id from member where member_id = ?))",
+              //     [role.id, member.user.id]
+              //   );
+              // }
             });
           });
           guild.fetchBans().then((ban) => {
@@ -506,7 +646,7 @@ exports.run = (client, message) => {
   // message.channel.send("la base de donnée à été crée et initalisée");
 
   setTimeout(function suprr() {
-    message.channel.bulkDelete(2);
+    message.channel.bulkDelete(1);
   }, 2000);
 };
 
