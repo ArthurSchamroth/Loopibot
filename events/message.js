@@ -19,7 +19,7 @@ module.exports = (client, message) => {
     try {
       client.mysql
         .selectSql(
-          "select command.name, command.command_id, command.response, execute.enabled FROM command join execute on command.command_id = execute.command_id where execute.guild_id = ?",
+          "select command.name, command.command_id, command.description, execute.enabled FROM command join execute on command.command_id = execute.command_id where execute.guild_id = ?",
           message.guild.id
         )
         .then(result => {

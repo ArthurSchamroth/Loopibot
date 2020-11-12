@@ -198,12 +198,19 @@ exports.run = (client, message) => {
         ${
           COLUMNS_DISCORD_COMMAND[i++]
         } varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+        custom tinyint(4) not null,
         PRIMARY KEY (${COLUMNS_DISCORD_COMMAND[0]}),
         UNIQUE KEY ${COLUMNS_DISCORD_COMMAND[1]}_UNIQUE (${
         COLUMNS_DISCORD_COMMAND[1]
       })
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
+      client.mysql.querySql(`Create table response(
+        response_id serial not null,
+        response varchar(45) not null,
+        command_id bigint(20) UNSIGNED,
+        Primary Key (response_id)
+      )`);
       i = 0;
       client.mysql.querySql(`CREATE TABLE ${TABLES[9]} (
         ${COLUMNS_DISCORD_HAS_PERMISSION[i++]} SERIAL NOT NULL,
@@ -291,7 +298,6 @@ exports.run = (client, message) => {
       })
       )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
 
-  
       client.mysql.querySql(
         `ALTER TABLE ?? ADD FOREIGN KEY
           (${COLUMNS_DISCORD_JOIN[1]})
@@ -419,13 +425,19 @@ exports.run = (client, message) => {
       ${TABLES[0]}(${COLUMNS_DISCORD_GUILDS[1]})`,
         [TABLES[11]]
       );
+      client.mysql.querySql(
+        `Alter table response add foreign key
+        (command_id)
+        references
+        command(command_id) ON DELETE CASCADE `
+      );
     }
 
     client.mysql.querySql(
       "create or replace procedure insert_guild(in guild_id varchar(45), in name varchar(255), in owner_id varchar(45), in owner_username varchar(45), in guild_creation date, in avatar varchar(255), in available tinyint(4)) begin insert ignore into guild(guild_id,name,owner_id,owner_username,guild_creation,avatar,available) values(guild_id,name,owner_id,owner_username,guild_creation,avatar,available); end;"
     );
     client.mysql.querySql(
-      "create or replace procedure insert_command(in name varchar(255), in response varchar(255)) begin insert ignore into command(name,response) values(name,response); end;"
+      "create or replace procedure insert_command(in name varchar(255), in description varchar(255), in custom tinyint(4)) begin insert ignore into command(name,description, custom) values(name,description, custom); end;"
     );
     client.mysql.querySql(
       "create or replace procedure insert_execute(in command_id bigint(20), in guild_id varchar(45), in enabled tinyint(4)) begin insert ignore into execute(command_id,guild_id, enabled) values(command_id,guild_id, enabled); end"
@@ -497,29 +509,32 @@ exports.run = (client, message) => {
             }
           });
 
-          client.mysql.querySql("call insert_command(?,?)", [
+          client.mysql.querySql("call insert_command(?,?,?)", [
             "avatar",
             "show user avatar",
+            false
           ]);
-
-          client.mysql.querySql("call insert_command(?,?)", [
+          client.mysql.querySql("call insert_command(?,?,?)", [
             "bd-set",
             "set birhtday",
+            false
           ]);
 
-          client.mysql.querySql("call insert_command(?,?)", [
+          client.mysql.querySql("call insert_command(?,?,?)", [
             "clear-channel",
             "delete all the message from a channel",
+            false
           ]);
-
-          client.mysql.querySql("call insert_command(?,?)", [
+          client.mysql.querySql("call insert_command(?,?,?)", [
             "delete",
             "delete a number of message",
+            false
           ]);
 
-          client.mysql.querySql("call insert_command(?,?)", [
+          client.mysql.querySql("call insert_command(?,?,?)", [
             "sinfo",
             "show info from the current server",
+            false
           ]);
 
           client.mysql.querySql(
@@ -590,7 +605,14 @@ exports.run = (client, message) => {
               try {
                 client.mysql.querySql(
                   "call insert_role( ?, ?, (select guild_id from guild where guild_id = ?), ?, ?, ?)",
-                  [role.id, role.name, guild.id, role.color, role.position, role.members.size]
+                  [
+                    role.id,
+                    role.name,
+                    guild.id,
+                    role.color,
+                    role.position,
+                    role.members.size,
+                  ]
                 );
               } catch (error) {
                 console.log(error);
