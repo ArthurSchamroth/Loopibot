@@ -207,7 +207,7 @@ exports.run = (client, message) => {
 
       client.mysql.querySql(`Create table response(
         response_id serial not null,
-        response varchar(45) not null,
+        response text(2000) not null,
         command_id bigint(20) UNSIGNED,
         Primary Key (response_id)
       )`);
@@ -365,7 +365,7 @@ exports.run = (client, message) => {
         `ALTER TABLE ?? ADD FOREIGN KEY
       (${COLUMNS_DISCORD_HAS_PERMISSION[2]})
         REFERENCES 
-          ${TABLES[8]}(${COLUMNS_DISCORD_COMMAND[0]});`,
+          ${TABLES[8]}(${COLUMNS_DISCORD_COMMAND[0]}) ON DELETE CASCADE;`,
         [TABLES[9]]
       );
       client.mysql.querySql(
